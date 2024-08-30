@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Task List</h1>
+
+<form method="GET">
+    <select name="category">
+        <option value="">All Categories</option>
+        {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+        {% endfor %}
+    </select>
+    <input type="text" name="search" placeholder="Search by title">
+    <button type="submit">Filter</button>
+</form>
+
+<ul>
+    {% for task in tasks %}
+        <li><a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a> - {{ task.category.name }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
